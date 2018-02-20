@@ -12,6 +12,7 @@ Select your grocery list :
 <div id="div1">
 </div>
 <p id="tp"> </p>
+<p id="finaldir"> </p>
 </body>
 </html>
 
@@ -294,7 +295,8 @@ function GridNode(x, y, weight) {
 }
 
 GridNode.prototype.toString = function() {
-  return "[" + this.x + " " + this.y + "]";
+  //return "[" + this.x + " " + this.y + "]";
+  return this.x + "," + this.y ;
 };
 
 GridNode.prototype.getCost = function(fromNeighbor) {
@@ -446,7 +448,7 @@ clist = firebdata.split(',');
 var myDiv = document.getElementById("div2");
 for (var i = 0; i < clist.length-1; i++) 
 {
-    if (clist[i]==="Path")
+    if (clist[i]==="Path" || clist[i]==="Directions")
     {
       continue;
     }
@@ -487,7 +489,6 @@ function myFunction() {
 }
 console.log(choices);
 
-//infrastructure 
 var graph = new Graph([
         [1,1,1,1,1,1,1],
         [1,0,1,0,1,0,1],
@@ -540,7 +541,6 @@ var totalpath = new Array();
                    yv = yvalue.val();
                     });
 
-
                  console.log(xv);
                  var start = graph.grid[aa][bb];
                  var end = graph.grid[xv][yv];
@@ -571,11 +571,48 @@ var totalpath = new Array();
         }
            
       }
-
-      document.getElementById("tp").innerHTML = "Total Path to traverse : " + totalpath;
+      var fpath = new Array();
+      fpath = totalpath.split(",");
+      document.getElementById("tp").innerHTML = "Total Path to traverse : " + (fpath);
       firebase.database().ref('Path/').set({
       path: totalpath
       });
+      var cd =0;
+      var fdir = new Array();
+      var dir;
+      while( cd < (fpath.length-3))
+      {
+        if((fpath[cd+1])<(fpath[cd+3]))
+        {
+          dir="right";
+          fdir=fdir+","+dir;
+        }
+        else if((fpath[cd+1])>(fpath[cd+3]))
+        {
+          dir ="left";
+          fdir=fdir+","+dir;
+        }
+        else if (fpath[cd]<(fpath[cd+2]))
+        {
+          dir="forward";
+          fdir=fdir+","+dir;
+        }
+        else if (fpath[cd]>(fpath[cd+2]))
+        {
+          dir="reverse";
+          fdir=fdir+","+dir;
+        }
+        cd=cd+2;
+
+      }
+      console.log(fdir);
+
+      firebase.database().ref('Directions/').set({
+      directions: fdir
+      });
+
+      document.getElementById("finaldir").innerHTML = "Final Directions : " + (fdir);
+
 }
   // result is an array containing the shortest path
 </script>
