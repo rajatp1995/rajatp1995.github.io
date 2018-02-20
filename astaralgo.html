@@ -584,22 +584,22 @@ var totalpath = new Array();
       {
         if((fpath[cd+1])<(fpath[cd+3]))
         {
-          dir="right";
+          dir="Move Right";
           fdir=fdir+","+dir;
         }
         else if((fpath[cd+1])>(fpath[cd+3]))
         {
-          dir ="left";
+          dir ="Move Left";
           fdir=fdir+","+dir;
         }
         else if (fpath[cd]<(fpath[cd+2]))
         {
-          dir="forward";
+          dir="Move Forward";
           fdir=fdir+","+dir;
         }
         else if (fpath[cd]>(fpath[cd+2]))
         {
-          dir="reverse";
+          dir="Move Reverse";
           fdir=fdir+","+dir;
         }
         cd=cd+2;
