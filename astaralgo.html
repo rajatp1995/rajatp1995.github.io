@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <style>
+  table, td {
+    border: 1px solid black;
+  }
+</style>
 </head>
 <body>
   <div class="container">
@@ -24,6 +30,16 @@ Select your grocery list :
 <br>
 <p id="tp"> </p>
 <p id="finaldir"> </p>
+<br>
+<table id="tabs" style="width:100%">
+  <th>
+    <td><b><center>Path</center></b></td>
+    <td><b><center>Direction</center></b></td>
+  </th>
+</table>
+<table id="myTable" style="width:100%">
+</table>
+<br>
 </div>
 </body>
 </html>
@@ -489,7 +505,8 @@ namee.forEach(function(childSnapshot) {
     });
   });
 
-function myFunction() {
+function myFunction() 
+{
 
   var choices = [];
   var els = document.getElementsByName('shoplist');
@@ -660,12 +677,18 @@ totalpath = [0,0];
       for (var f=0;f<(fpath.length);f=f+2)
       {
         pathtodisplay = pathtodisplay + "[" + fpath[f] + "," + fpath[f+1] + "]";
+        if(f<=(fpath.length-3))
+        {
+          pathtodisplay = pathtodisplay + "->";
+        }
       }
 
-      document.getElementById("tp").innerHTML = "Total Path to traverse : " + pathtodisplay;
+      //document.getElementById("tp").innerHTML = "Total Path to traverse : " + pathtodisplay;
       firebase.database().ref('Path/').set({
       path: totalpath
       });
+
+      var dpath = pathtodisplay.split("->");
 
 var cd=0;
 var str = new Array();
@@ -727,11 +750,43 @@ else if((fpath[cd+1])===(fpath[cd+3])&&(fpath[cd])>(fpath[cd+2]))
 cd=cd+2;
 } 
 
-      console.log(str);
-      document.getElementById("finaldir").innerHTML = "Directions : " + (str);
+      var dirgrid = new Array();
+      for (var g=0;g<dpath.length;g++)
+      {
+        if(g<(dpath.length-1))
+        {
+        dirgrid.push({
+            cdn: dpath[g],
+            direction: str[g]
+        });
+        }
+        else
+        {
+        dirgrid.push({
+            cdn: dpath[g],
+            direction: "End"
+        });  
+        }
+
+      }
+
+      console.log(dirgrid);
+
+      //document.getElementById("finaldir").innerHTML = "Directions : " + (str);
       firebase.database().ref('Directions/').set({
-      directions: str
+      directions: dirgrid
       });
+
+      var table = document.getElementById("myTable");
+
+      for(var t=0;t<dirgrid.length;t++)
+      {
+      var row = table.insertRow(t);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      cell1.innerHTML = "<center>" + dirgrid[t].cdn + "</center>";
+      cell2.innerHTML = "<center>" + dirgrid[t].direction + "</center>";
+      }
 }
 </script>
 
