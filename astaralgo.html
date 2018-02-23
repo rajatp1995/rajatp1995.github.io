@@ -642,9 +642,15 @@ totalpath = [0,0];
       }
 
       var fpath = new Array();
-
       fpath = totalpath.split(",");
-      document.getElementById("tp").innerHTML = "Total Path to traverse : " + (fpath);
+
+      var pathtodisplay = new Array();
+      for (var f=0;f<(fpath.length);f=f+2)
+      {
+        pathtodisplay = pathtodisplay + "[" + fpath[f] + "," + fpath[f+1] + "]";
+      }
+
+      document.getElementById("tp").innerHTML = "Total Path to traverse : " + pathtodisplay;
       firebase.database().ref('Path/').set({
       path: totalpath
       });
@@ -653,7 +659,7 @@ totalpath = [0,0];
       var currentdir;
 
 
-      for (var j=0;j<(fpath.length-2);j=j+2)
+      for (var j=0;j<(fpath.length);j=j+2)
       {
         if (fpath[j]===fpath[j+2] && fpath[j+1]<fpath[j+3])
         {
@@ -661,6 +667,12 @@ totalpath = [0,0];
            {
             fdir.push("Forward");
             currentdir = "l";
+           }
+
+          if (currentdir==="r")
+           {
+            fdir.push("Right");
+            currentdir = "f";
            }
 
            else
