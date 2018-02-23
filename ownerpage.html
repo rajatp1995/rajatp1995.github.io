@@ -1,0 +1,80 @@
+<html>
+<head>
+  <title>Smart Shopping Cart</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+	<h2>Add new items</h2>
+	<form id="dataform">
+		Enter Product Name : <input type="text" name="pname">
+		Enter X-Coordinate : <input type="text" name="px">
+		Enter Y-Coordinate : <input type="text" name="py">
+		<button onclick="saveData()">Save Data</button>
+	</form>
+  <br><br>
+  <button id="myButton" class="float-left submit-button" >Back to Smart Cart</button>
+</div>
+</body>
+</html>
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
+
+<script type="text/javascript">
+	var config = {
+    apiKey: "AIzaSyCn_P-dbq07eDimEGzS8qMGObW1JP_U4ts",
+    authDomain: "projectdatabase-d5dcc.firebaseapp.com",
+    databaseURL: "https://projectdatabase-d5dcc.firebaseio.com",
+    projectId: "projectdatabase-d5dcc",
+    storageBucket: "projectdatabase-d5dcc.appspot.com",
+    messagingSenderId: "289821114496"
+  };
+    firebase.initializeApp(config);
+
+ </script>
+
+ <script type="text/javascript">
+
+    document.getElementById("myButton").onclick = function () {
+    location.href = "index.html";
+    };
+
+  	var pdata = "";
+  	var proddata = new Array();
+  	var fdata = new Array();
+
+  	var compdata;
+    var complist = firebase.database().ref();
+    complist.on('value', function(namee){
+    namee.forEach(function(childSnapshot) {
+        var key = childSnapshot.key;
+        var childData = childSnapshot.val();
+        });
+    });
+
+	function saveData() {
+    var x = document.getElementById("dataform");
+    var i;
+    for (i = 0; i < x.length ;i++) {
+        pdata += x.elements[i].value + ",";
+    }
+    proddata = pdata.split(",");
+    fdata = proddata.slice(0,3);
+    console.log(fdata);
+
+
+    firebase.database().ref(fdata[0]).set({
+    name: fdata[0],
+    xval: fdata[1],
+    yval: fdata[2]
+    });
+
+    }  
+</script>

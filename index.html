@@ -19,7 +19,10 @@
     <input type="submit" name="submit" onclick="myFunctio()">
 	<br>
 	<br>
+
 </form>
+
+<button id="myButton" class="float-left submit-button" >Add new items</button>
 </div>
 </body>
 </html>
@@ -56,6 +59,11 @@
 </script>
 
 <script type="text/javascript">	
+
+	document.getElementById("myButton").onclick = function () {
+    location.href = "ownerpage.html";
+    };
+
 	var textu = "";
 	var myData;
 
