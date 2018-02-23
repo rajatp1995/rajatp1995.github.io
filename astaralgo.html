@@ -270,7 +270,6 @@ Graph.prototype.neighbors = function(node) {
       ret.push(grid[x + 1][y + 1]);
     }
   }
-
   return ret;
 };
 
@@ -507,18 +506,18 @@ var graph = new Graph([
 
 var ka = choices.length;
 var ma = 0;
-//var maa = 0;
 var aa = 0;
 var bb = 0;
 var jj = 0;
 var xv, yv, itemnm;
 
+var pathdis = new Array();
 var pp = new Array();
 var totalpath = new Array();
-//var grocery = [["Butter","2","4"],["Bread","4","4"],["Toothpaste","5","6"],["Jam","9","6"]];
-//console.log(grocery);
+totalpath = [0,0];
+
       while(jj<=choices.length & ka!=0)
-      {
+      { 
                    
                    var itemname = firebase.database().ref().child(choices[ma]).child("name");
                    itemname.on('value', function(namee){
@@ -528,8 +527,6 @@ var totalpath = new Array();
 
                    if(choices[ma]===itemnm)
                    {
-
-                  console.log("Value found");
 
                    var itemx = firebase.database().ref().child(choices[ma]).child("xval");
                    itemx.on('value', function(xvalue){
@@ -541,13 +538,84 @@ var totalpath = new Array();
                    yv = yvalue.val();
                     });
 
+                 var start = graph.grid[0][0];
+                 var end = graph.grid[xv][yv];
+                 var result = astar.search(graph, start, end);
+
+                 ma++;
+                 ka--;
+                 aa = xv;
+                 bb = yv;
+                 jj = 0;
+
+                 pathdis.push({
+                   key : result.length,
+                   value : choices[ma-1]
+                 });
+              }
+        else
+        {
+        jj++;
+        }
+           
+      }
+
+      function keysrt(key) {
+         return function(a,b){
+             if (a[key] > b[key]) return 1;
+             if (a[key] < b[key]) return -1;
+                return 0;
+         }
+      }
+
+      var pathdis1 = pathdis.sort(keysrt('key'));     
+
+      var newpath = new Array();
+
+      for (var k=0;k<pathdis1.length;k++)
+      {
+          newpath[k] = pathdis1[k].value;
+      }
+
+      console.log(newpath);
+
+      ka = newpath.length;
+      ma = 0;
+      aa = 0;
+      bb = 0;
+      jj = 0;
+
+      while(jj<=newpath.length & ka!=0)
+      { 
+                   
+                   var itemname = firebase.database().ref().child(newpath[ma]).child("name");
+                   itemname.on('value', function(namee){
+                    itemnm = namee.val(); 
+                   });
+                   console.log(itemnm);
+
+                   if(newpath[ma]===itemnm)
+                   {
+
+                  console.log("Value found");
+
+                   var itemx = firebase.database().ref().child(newpath[ma]).child("xval");
+                   itemx.on('value', function(xvalue){
+                    xv = xvalue.val(); 
+                   });
+
+                  var itemy = firebase.database().ref().child(newpath[ma]).child("yval");
+                   itemy.on('value', function(yvalue){
+                   yv = yvalue.val();
+                    });
+
                  console.log(xv);
                  var start = graph.grid[aa][bb];
                  var end = graph.grid[xv][yv];
                  var result = astar.search(graph, start, end);
                  var nodelbr1 = document.createElement("br");
                  var para = document.createElement(pp[jj]);
-                 var node = document.createTextNode("Path to " + choices[ma] + " : ");
+                 var node = document.createTextNode("Path to " + newpath[ma] + " : ");
                  var noderes = document.createTextNode(result);
                  var nodelbr2 = document.createElement("br");
                  para.appendChild(nodelbr1);
@@ -562,7 +630,8 @@ var totalpath = new Array();
                  bb = yv;
                  jj = 0;
 
-                 totalpath = totalpath + result + ",";
+                 totalpath =totalpath + "," + result;
+
               }
         else
         {
@@ -571,50 +640,84 @@ var totalpath = new Array();
         }
            
       }
+
       var fpath = new Array();
+
       fpath = totalpath.split(",");
       document.getElementById("tp").innerHTML = "Total Path to traverse : " + (fpath);
       firebase.database().ref('Path/').set({
       path: totalpath
       });
-      var cd =0;
+
       var fdir = new Array();
-      var dir;
-      while( cd < (fpath.length-3))
+      var currentdir;
+
+
+      for (var j=0;j<(fpath.length-2);j=j+2)
       {
-        if((fpath[cd+1])<(fpath[cd+3]))
+        if (fpath[j]===fpath[j+2] && fpath[j+1]<fpath[j+3])
         {
-          dir="Move Left";
-          fdir=fdir+","+dir;
+           if (currentdir==="l")
+           {
+            fdir.push("Forward");
+            currentdir = "l";
+           }
+
+           else
+           {
+           fdir.push("Forward");
+           currentdir = "f";
+           }
         }
-        else if((fpath[cd+1])>(fpath[cd+3]))
+
+        if (fpath[j]<fpath[j+2] && fpath[j+1]===fpath[j+3])
         {
-          dir ="Move Right";
-          fdir=fdir+","+dir;
+           if (currentdir==="r")
+           {
+            fdir.push("Forward");
+            currentdir = "r";
+           }
+
+           else
+           {         
+           fdir.push("Right");
+           currentdir = "r";
+           }
         }
-        else if (fpath[cd]<(fpath[cd+2]))
+
+        if (fpath[j]>fpath[j+2] && fpath[j+1]===fpath[j+3])
         {
-          dir="Move Forward";
-          fdir=fdir+","+dir;
+           if (currentdir==="u")
+           {
+            fdir.push("Forward");
+            currentdir = "u";
+           }
+            else
+            {
+          fdir.push("Reverse");
+          currentdir = "u";
+            }
         }
-        else if (fpath[cd]>(fpath[cd+2]))
+
+        if (fpath[j]===fpath[j+2] && fpath[j+1]>fpath[j+3])
         {
-          dir="Move Reverse";
-          fdir=fdir+","+dir;
+           if (currentdir==="l")
+           {
+            fdir.push("Forward");
+            currentdir = "l";
+           }
+           else
+           {
+          fdir.push("Left");
+          currentdir = "l";
+           }
         }
-        cd=cd+2;
 
       }
+
       console.log(fdir);
-
-      firebase.database().ref('Directions/').set({
-      directions: fdir
-      });
-
-      document.getElementById("finaldir").innerHTML = "Final Directions : " + (fdir);
-
+      document.getElementById("finaldir").innerHTML = "Directions : " + (fdir);
 }
-  // result is an array containing the shortest path
 </script>
 
 
