@@ -669,74 +669,91 @@ totalpath = [0,0];
 
       var fdir = new Array();
       var currentdir;
-
-
       for (var j=0;j<(fpath.length);j=j+2)
       {
         if (fpath[j]===fpath[j+2] && fpath[j+1]<fpath[j+3])
         {
-           if (currentdir==="l")
-           {
-            fdir.push("Forward");
-            currentdir = "l";
-           }
-
-          if (currentdir==="r")
+           if (currentdir==="upward")
            {
             fdir.push("Right");
-            currentdir = "f";
+            currentdir = "forward";
            }
+
+           else if (currentdir==="downward")
+           {
+            fdir.push("Left");
+            currentdir = "forward";
+           }           
 
            else
            {
            fdir.push("Forward");
-           currentdir = "f";
+           currentdir = "forward";
            }
         }
 
         if (fpath[j]<fpath[j+2] && fpath[j+1]===fpath[j+3])
         {
-           if (currentdir==="r")
+           if (currentdir==="forward")
            {
-            fdir.push("Forward");
-            currentdir = "r";
+            fdir.push("Right");
+            currentdir = "downward";
+           }
+
+           else if (currentdir==="backward")
+           {
+            fdir.push("Left");
+            currentdir = "downward";
            }
 
            else
            {         
-           fdir.push("Right");
-           currentdir = "r";
+           fdir.push("Forward");
+           currentdir = "downward";
            }
         }
 
-        if (fpath[j]>fpath[j+2] && fpath[j+1]===fpath[j+3])
+        if (fpath[j+1]>fpath[j+3] && fpath[j]===fpath[j+2])
         {
-           if (currentdir==="u")
+           if (currentdir==="downward")
            {
-            fdir.push("Forward");
-            currentdir = "u";
+            fdir.push("Right");
+            currentdir = "backward";
            }
-            else
-            {
-          fdir.push("Reverse");
-          currentdir = "u";
-            }
+
+           else if (currentdir==="upward")
+           {
+            fdir.push("Left");
+            currentdir = "backward";
+           }
+
+          else
+          {
+            fdir.push("Forward");
+            currentdir = "backward";
+          }
         }
 
-        if (fpath[j]===fpath[j+2] && fpath[j+1]>fpath[j+3])
+        if (fpath[j+1]===fpath[j+3] && fpath[j]>fpath[j+2])
         {
-           if (currentdir==="l")
+           if (currentdir==="backward")
            {
-            fdir.push("Forward");
-            currentdir = "l";
+            fdir.push("Right");
+            currentdir = "upward";
            }
+
+           if (currentdir==="forward")
+           {
+            fdir.push("Left");
+            currentdir = "upward";
+           }
+
            else
            {
-          fdir.push("Left");
-          currentdir = "l";
+            fdir.push("Forward");
+            currentdir = "upward";
            }
         }
-
       }
 
       console.log(fdir);
