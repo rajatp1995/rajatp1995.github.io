@@ -32,14 +32,20 @@
 		<input type="text" name="py" placeholder="Y-Coordinate">
     <br><br>
 		<button onclick="saveData()">Save Data</button>
+    &nbsp;
+    &nbsp;
 	</form>
+  <button id="refButton" class="float-left submit-button" >Refresh</button>
   <br><br>
   <b>To delete any item :</b><br>
   <form id="dataformdel">
   <input type="text" name="pname" placeholder="Product Name to be deleted">
   <br><br>
-  <button onclick="delData()">Delete Data</button><br><br><br>
-  <button id="refButton" class="float-left submit-button" >Back to Smart Cart</button>
+  <button onclick="delData()">Delete Data</button>
+  &nbsp;
+  &nbsp;
+  </form>
+  <button id="refButton" class="float-left submit-button" >Refresh</button>
 </div>
 </body>
 </html>
@@ -64,9 +70,9 @@
 
  <script type="text/javascript">
 
-      document.getElementById("refButton").onclick = function () {
+      /*document.getElementById("refButton").onclick = function () {
       location.href = "index.html";
-      };
+      };*/
 
       var firebdataa = sessionStorage.getItem('fbase');
       var cllist = new Array();
