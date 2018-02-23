@@ -72,11 +72,13 @@
     fdata = proddata.slice(0,3);
     console.log(fdata);
 
+    var a = parseInt(fdata[1]);
+    var b = parseInt(fdata[2]);
 
     firebase.database().ref(fdata[0]).set({
     name: fdata[0],
-    xval: fdata[1],
-    yval: fdata[2]
+    xval: a,
+    yval: b
     });
 
     }  
