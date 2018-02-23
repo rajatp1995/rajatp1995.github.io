@@ -26,7 +26,10 @@
 <div id="div2">
 </div>
 <br>
-<button onclick="myFunction()">Generate Path</button>
+<button onclick="myFunction()">Generate Path</button> 
+&nbsp; 
+&nbsp; 
+<button id="refButton" class="float-left submit-button" >Refresh List</button>
 <div id="div1">
 </div>
 <br>
@@ -468,6 +471,10 @@ return {
 </script>
 
 <script type='text/javascript'>
+
+document.getElementById("refButton").onclick = function () {
+location.href = "astaralgo.html";
+};
 
 var firebdata = sessionStorage.getItem('fbase');
 var clist = new Array();
