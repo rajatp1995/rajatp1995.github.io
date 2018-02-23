@@ -6,10 +6,24 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+       table, td {
+       border: 1px solid black;
+       }
+    </style>
 </head>
 <body>
 	<div class="container">
-	<h2>Add new items</h2>
+	<h3><center>Update Items</center></h3>
+  <table id="tabss" style="width:100%">
+   <th>
+     <td><b><center>Available Items</center></b></td>
+   </th>
+  </table>
+  <table id="myTablee" style="width:100%">
+  </table><br>
+  <b>To add a new item :</b><br>
 	<form id="dataform">
 		<input type="text" name="pname" placeholder="Product Name">
     <br>
@@ -20,7 +34,12 @@
 		<button onclick="saveData()">Save Data</button>
 	</form>
   <br><br>
-  <button id="myButton" class="float-left submit-button" >Back to Smart Cart</button>
+  <b>To delete a new item :</b><br>
+  <form id="dataformdel">
+  <input type="text" name="pname" placeholder="Product Name to be deleted">
+  <br><br>
+  <button onclick="saveData()">Delete Data</button><br><br><br>
+  <button id="refButton" class="float-left submit-button" >Back to Smart Cart</button>
 </div>
 </body>
 </html>
@@ -44,6 +63,23 @@
  </script>
 
  <script type="text/javascript">
+
+      document.getElementById("refButton").onclick = function () {
+      location.href = "astaralgo.html";
+      };
+
+      var firebdataa = sessionStorage.getItem('fbase');
+      var cllist = new Array();
+      cllist = firebdataa.split(',');
+
+      var table = document.getElementById("myTablee");
+
+      for(var t=0;t<cllist.length;t++)
+      {
+      var row = table.insertRow(t);
+      var cell1 = row.insertCell(0);
+      cell1.innerHTML = "<center>" + cllist[t] + "</center>";
+      }
 
     document.getElementById("myButton").onclick = function () {
     location.href = "index.html";
