@@ -730,7 +730,7 @@ cd=cd+2;
       console.log(str);
       document.getElementById("finaldir").innerHTML = "Directions : " + (str);
       firebase.database().ref('Directions/').set({
-      path: totalpath
+      directions: str
       });
 }
 </script>
