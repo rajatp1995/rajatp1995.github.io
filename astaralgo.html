@@ -667,97 +667,71 @@ totalpath = [0,0];
       path: totalpath
       });
 
-      var fdir = new Array();
-      var currentdir;
-      for (var j=0;j<(fpath.length);j=j+2)
-      {
-        if (fpath[j]===fpath[j+2] && fpath[j+1]<fpath[j+3])
-        {
-           if (currentdir==="upward")
-           {
-            fdir.push("Right");
-            currentdir = "forward";
-           }
+var cd=0;
+var str = new Array();
+if((fpath[2]==="0")&&(fpath[3]==="1"))
+{str.push("Forward");
+}
+else if ((fpath[2]==="1")&&(fpath[3]==="0"))
+{str.push("Right");}
 
-           else if (currentdir==="downward")
-           {
-            fdir.push("Left");
-            currentdir = "forward";
-           }           
+while(cd+6<=fpath.length)
+{if((fpath[cd])===(fpath[cd+2])&&(fpath[cd+1])<(fpath[cd+3]))
+{
+  if((fpath[cd])===(fpath[cd+4])&&fpath[cd+1]===fpath[cd+5])
+  str.push("Reverse");
+  else if((fpath[cd+3])===(fpath[cd+5])&&(fpath[cd+2])<(fpath[cd+4]))
+  str.push("Right");
+  else if((fpath[cd+3])===(fpath[cd+5])&&(fpath[cd+2])>(fpath[cd+4]))
+  str.push("Left");
+  else if((fpath[cd+2])===(fpath[cd+4]))
+  str.push("Forward");
+  
+}
+else if((fpath[cd])===(fpath[cd+2])&&(fpath[cd+1])>(fpath[cd+3]))
+{
+  if((fpath[cd])===(fpath[cd+4])&&fpath[cd+1]===fpath[cd+5])
+  str.push("Reverse");
+  else if((fpath[cd+3])===(fpath[cd+5])&&(fpath[cd+2])>(fpath[cd+4]))
+  str.push("Right");
+  else if((fpath[cd+3])===(fpath[cd+5])&&(fpath[cd+2])<(fpath[cd+4]))
+  str.push("Left");
+  else if((fpath[cd+2])===(fpath[cd+4]))
+  str.push("Forward");
+  
+}
+else if((fpath[cd+1])===(fpath[cd+3])&&(fpath[cd])<(fpath[cd+2]))
+{
+  if((fpath[cd])===(fpath[cd+4])&&fpath[cd+1]===fpath[cd+5])
+  str.push("Reverse");
+  else if((fpath[cd+2])===(fpath[cd+4])&&(fpath[cd+3])<(fpath[cd+5]))
+  str.push("Left");
+  else if((fpath[cd+2])===(fpath[cd+4])&&(fpath[cd+3])>(fpath[cd+5]))
+  str.push("Right");
+  else if((fpath[cd+3])===(fpath[cd+5]))
+  str.push("Forward");
+  
+}
+else if((fpath[cd+1])===(fpath[cd+3])&&(fpath[cd])>(fpath[cd+2]))
+{
+  if((fpath[cd])===(fpath[cd+4])&&fpath[cd+1]===fpath[cd+5])
+  str.push("Reverse");
+  else if((fpath[cd+2])===(fpath[cd+4])&&(fpath[cd+3])>(fpath[cd+5]))
+  str.push("Left");
+  else if((fpath[cd+2])===(fpath[cd+4])&&(fpath[cd+3])<(fpath[cd+5]))
+  str.push("Right");
+  else if((fpath[cd+3])===(fpath[cd+5]))
+  str.push("Forward");
+  
+}
+cd=cd+2;
+} 
 
-           else
-           {
-           fdir.push("Forward");
-           currentdir = "forward";
-           }
-        }
-
-        if (fpath[j]<fpath[j+2] && fpath[j+1]===fpath[j+3])
-        {
-           if (currentdir==="forward")
-           {
-            fdir.push("Right");
-            currentdir = "downward";
-           }
-
-           else if (currentdir==="backward")
-           {
-            fdir.push("Left");
-            currentdir = "downward";
-           }
-
-           else
-           {         
-           fdir.push("Forward");
-           currentdir = "downward";
-           }
-        }
-
-        if (fpath[j+1]>fpath[j+3] && fpath[j]===fpath[j+2])
-        {
-           if (currentdir==="downward")
-           {
-            fdir.push("Right");
-            currentdir = "backward";
-           }
-
-           else if (currentdir==="upward")
-           {
-            fdir.push("Left");
-            currentdir = "backward";
-           }
-
-          else
-          {
-            fdir.push("Forward");
-            currentdir = "backward";
-          }
-        }
-
-        if (fpath[j+1]===fpath[j+3] && fpath[j]>fpath[j+2])
-        {
-           if (currentdir==="backward")
-           {
-            fdir.push("Right");
-            currentdir = "upward";
-           }
-
-           if (currentdir==="forward")
-           {
-            fdir.push("Left");
-            currentdir = "upward";
-           }
-
-           else
-           {
-            fdir.push("Forward");
-            currentdir = "upward";
-           }
-        }
-      }
-
-      console.log(fdir);
-      document.getElementById("finaldir").innerHTML = "Directions : " + (fdir);
+      console.log(str);
+      document.getElementById("finaldir").innerHTML = "Directions : " + (str);
+      firebase.database().ref('Directions/').set({
+      path: totalpath
+      });
 }
 </script>
 
