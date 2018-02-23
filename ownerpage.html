@@ -16,12 +16,12 @@
 <body>
 	<div class="container">
 	<h3><center>Add/Remove Items</center></h3>
-  <table id="tabss" style="width:100%">
+  <table id="tabss" style="width:100% ; background-color: #FFA500">
    <th>
      <td><b><center>Available Items</center></b></td>
    </th>
   </table>
-  <table id="myTablee" style="width:100%">
+  <table id="myTablee" style="width:100% ; background-color: #C0C0C0">
   </table><br>
   <b>To add a new item :</b><br>
 	<form id="dataform">
@@ -45,7 +45,7 @@
   &nbsp;
   &nbsp;
   </form>
-  <button id="refButton" class="float-left submit-button" >Refresh</button>
+  <button id="refButtonn" class="float-left submit-button" >Refresh</button>
 </div>
 </body>
 </html>
@@ -95,6 +95,10 @@
       }
 
     document.getElementById("refButton").onclick = function () {
+    location.href = "index.html";
+    };
+
+    document.getElementById("refButtonn").onclick = function () {
     location.href = "index.html";
     };
 
