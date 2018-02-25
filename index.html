@@ -25,7 +25,7 @@
 
 </form>
 
-<button id="myButton" class="float-left submit-button" >Add/Remove items</button>
+<!--<button id="myButton" class="float-left submit-button" >Add/Remove items</button>-->
 <br>
 <br>
 <button onclick="startt()">Find Bluetooth device</button>
@@ -43,7 +43,7 @@
 function startt()
 {
 navigator.bluetooth.requestDevice({
-  filters: [{ acceptAllDevices: true }]
+  acceptAllDevices: true
 })
   .then(function(device) {
     // Step 2: Connect to it
