@@ -43,7 +43,7 @@
 function startt()
 {
 navigator.bluetooth.requestDevice({
-  filters: [{ services: [0x1800] }]
+  filters: [{ name: ['mydevice'] }]
 })
   .then(function(device) {
     // Step 2: Connect to it
