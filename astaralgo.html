@@ -646,12 +646,32 @@ totalpath = [0,0];
                    yv = yvalue.val();
                     });
 
+
+                   if (aa===xv && bb===yv)
+                   {
+                        var para = document.createElement(pp[jj]);
+                        var nodelbr1 = document.createElement("br");
+                        var node = document.createTextNode("Path to " + newpath[ma] + " : Same location as " + newpath[ma-1]);
+                        var nodelbr2 = document.createElement("br");
+                        para.appendChild(nodelbr1);
+                        para.appendChild(node);
+                        para.appendChild(nodelbr2);
+                        var element = document.getElementById("div1");
+                        element.appendChild(para);
+                        ma++;
+                        ka--;
+                        aa = xv;
+                        bb = yv;
+                        jj = 0;
+                        continue;
+                   }
+
                  console.log(xv);
                  var start = graph.grid[aa][bb];
                  var end = graph.grid[xv][yv];
                  var result = astar.search(graph, start, end);
-                 var nodelbr1 = document.createElement("br");
                  var para = document.createElement(pp[jj]);
+                 var nodelbr1 = document.createElement("br");
                  var node = document.createTextNode("Path to " + newpath[ma] + " : ");
                  var noderes = document.createTextNode(result);
                  var nodelbr2 = document.createElement("br");
