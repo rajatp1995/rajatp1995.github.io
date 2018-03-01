@@ -801,12 +801,12 @@ cd=cd+2;
 
       var table = document.getElementById("myTable");
 
-      for(var t=0;t<dirgrid.length;t++)
+      for(var t=-1;t<dirgrid.length;t++)
       {
 
-      var row = table.insertRow(t);
+      var row = table.insertRow(t+1);
 
-        if (t===0)
+        if (t===-1)
         {
 
           var cell1 = row.insertCell(0);
@@ -820,11 +820,13 @@ cd=cd+2;
           continue;
         }
 
-
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      cell1.innerHTML = "<center>" + dirgrid[t].cdn + "</center>";
-      cell2.innerHTML = "<center>" + dirgrid[t].direction + "</center>";
+        else    
+        {
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          cell1.innerHTML = "<center>" + dirgrid[t].cdn + "</center>";
+          cell2.innerHTML = "<center>" + dirgrid[t].direction + "</center>";
+        }
       }
 }
 </script>

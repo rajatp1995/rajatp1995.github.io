@@ -80,12 +80,12 @@
 
       var table = document.getElementById("myTablee");
 
-      for(var t=0;t<cllist1.length;t++)
+      for(var t=-1;t<cllist1.length;t++)
       {
 
-        var row = table.insertRow(t);
+        var row = table.insertRow(t+1);
 
-        if (t===0)
+        if (t===-1)
         {
 
           var cell1 = row.insertCell(0);
