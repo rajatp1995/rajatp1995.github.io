@@ -82,15 +82,20 @@ navigator.bluetooth.requestDevice({
   firebase.initializeApp(config);
 
   var checklst = new Array();
-
+  var datacdn = new Array();
   var complist = firebase.database().ref();
   complist.on('value', function(namee){
   namee.forEach(function(childSnapshot) {
         var key = childSnapshot.key;
-        var childData = childSnapshot.val();
+        var cdatan = childSnapshot.val().name;
+        var cdatax = childSnapshot.val().xval;
+        var cdatay = childSnapshot.val().yval;
         checklst = checklst + key + ",";
         sessionStorage.setItem('fbase',checklst);
+        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + "-";
     });
+  console.log(datacdn);
+  sessionStorage.setItem('fdataa',datacdn);
 });
  
 </script>

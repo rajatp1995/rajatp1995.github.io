@@ -11,16 +11,12 @@
        table, td {
        border: 1px solid black;
        }
+
     </style>
 </head>
 <body>
 	<div class="container">
 	<h3><center>Add/Remove Items</center></h3>
-  <table id="tabss" style="width:100% ; background-color: #FFA500">
-   <th>
-     <td><b><center>Available Items</center></b></td>
-   </th>
-  </table>
   <table id="myTablee" style="width:100% ; background-color: #C0C0C0">
   </table><br>
   <b>To add a new item :</b><br>
@@ -70,11 +66,61 @@
 
  <script type="text/javascript">
 
-      /*document.getElementById("refButton").onclick = function () {
-      location.href = "index.html";
-      };*/
+      var firebdataa = sessionStorage.getItem('fdataa');
+      console.log(firebdataa);
 
-      var firebdataa = sessionStorage.getItem('fbase');
+      var cllist = new Array();
+      var cllist1 = new Array();
+      cllist = firebdataa.split('-');
+
+      for(var t=0;t<cllist.length-1;t++)
+      {
+          cllist1[t] = cllist[t].split(",");
+      }
+
+      var table = document.getElementById("myTablee");
+
+      for(var t=0;t<cllist1.length;t++)
+      {
+
+        var row = table.insertRow(t);
+
+        if (t===0)
+        {
+
+          var cell1 = row.insertCell(0);
+          cell1.innerHTML = "<center>" + "<b>" + "Y-Coordinate" + "</center>" + "</b>";
+          cell1.style.backgroundColor = "orange";
+
+          var cell2 = row.insertCell(0);
+          cell2.innerHTML = "<center>" + "<b>"  + "X-Coordinate" + "</center>" + "</b>";
+          cell2.style.backgroundColor = "orange";
+
+          var cell3 = row.insertCell(0);
+          cell3.innerHTML = "<center>" + "<b>" + "Available Items" + "</center>" + "</b>";
+          cell3.style.backgroundColor = "orange";
+
+          continue;
+        }
+
+        if (cllist1[t][0]==="undefined")
+        {
+          continue;
+        }
+        else
+        {
+          var cell1 = row.insertCell(0);
+          cell1.innerHTML = "<center>" + cllist1[t][2] + "</center>";
+
+          var cell2 = row.insertCell(0);
+          cell2.innerHTML = "<center>" + cllist1[t][1] + "</center>";
+
+          var cell3 = row.insertCell(0);
+          cell3.innerHTML = "<center>" + cllist1[t][0] + "</center>";
+        }
+      }
+
+      /*var firebdataa = sessionStorage.getItem('fbase');
       var cllist = new Array();
       cllist = firebdataa.split(',');
 
@@ -92,7 +138,7 @@
           var cell1 = row.insertCell(0);
           cell1.innerHTML = "<center>" + cllist[t] + "</center>";
         }
-      }
+      }*/
 
     document.getElementById("refButton").onclick = function () {
     location.href = "index.html";

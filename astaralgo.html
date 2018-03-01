@@ -35,12 +35,6 @@
 <br>
 <!--<p id="tp"> </p>
 <p id="finaldir"> </p> -->
-<table id="tabs" style="width:100% ; background-color: #FFA500">
-  <th>
-    <td><b><center>Path</center></b></td>
-    <td><b><center>Direction</center></b></td>
-  </th>
-</table>
 <table id="myTable" style="width:100% ; ; background-color: #C0C0C0">
 </table>
 <br>
@@ -809,7 +803,24 @@ cd=cd+2;
 
       for(var t=0;t<dirgrid.length;t++)
       {
+
       var row = table.insertRow(t);
+
+        if (t===0)
+        {
+
+          var cell1 = row.insertCell(0);
+          cell1.innerHTML = "<center>" + "<b>" + "Direction" + "</center>" + "</b>";
+          cell1.style.backgroundColor = "orange";
+
+          var cell2 = row.insertCell(0);
+          cell2.innerHTML = "<center>" + "<b>"  + "Path" + "</center>" + "</b>";
+          cell2.style.backgroundColor = "orange";
+
+          continue;
+        }
+
+
       var cell1 = row.insertCell(0);
       var cell2 = row.insertCell(1);
       cell1.innerHTML = "<center>" + dirgrid[t].cdn + "</center>";
