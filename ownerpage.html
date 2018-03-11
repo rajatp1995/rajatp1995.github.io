@@ -37,10 +37,7 @@
             var phoneNumber = user.phoneNumber;
             var providerData = user.providerData;
             user.getIdToken().then(function(accessToken) {
-              document.getElementById('account-details').textContent = JSON.stringify({
-                displayName: displayName,
-                photoURL: photoURL
-              }, null, '  ');
+              document.getElementById('account-details').textContent = displayName;
             });
           } else {
             document.getElementById('account-details').textContent = 'null';
@@ -64,9 +61,9 @@
 </head>
 <body>
 	<div class="container">
-    Logged in as : <br>
-    <div id="account-details"></div>
     <br>
+    <b>Logged in as : 
+    <div id="account-details"></div></b>
 	<h3><center>Add/Remove Items</center></h3>
   <table id="myTablee" style="width:100% ; background-color: #C0C0C0">
   </table><br>
