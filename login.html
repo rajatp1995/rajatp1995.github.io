@@ -1,13 +1,64 @@
-<html>
-<head>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
 
-  <title> Smart Shopping Cart </title>
-  <meta charset="utf-8">
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Smart Shopping Cart</title>
+     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script type="text/javascript">
+		var config = {
+    apiKey: "AIzaSyCn_P-dbq07eDimEGzS8qMGObW1JP_U4ts",
+    authDomain: "projectdatabase-d5dcc.firebaseapp.com",
+    databaseURL: "https://projectdatabase-d5dcc.firebaseio.com",
+    projectId: "projectdatabase-d5dcc",
+    storageBucket: "projectdatabase-d5dcc.appspot.com",
+    messagingSenderId: "289821114496"
+  };
+    firebase.initializeApp(config);
+</script>
+
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: 'ownerpage.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        ]
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
+  <body>
+    <h1>Login into Super Mart</h1>
+    <div id="firebaseui-auth-container"></div>
+  </body>
+
+<!--
+<head>
+  <title> Smart Shopping Cart </title>
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 </head>
+
+
 
 <body>
 	<div class="container">
@@ -25,11 +76,6 @@
 </div>
 </html>
 
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
-
 <script type="text/javascript">
 	var config = {
     apiKey: "AIzaSyCn_P-dbq07eDimEGzS8qMGObW1JP_U4ts",
@@ -42,7 +88,8 @@
     firebase.initializeApp(config);
 
  </script>
-
+-->
+<!--
 <script type="text/javascript">
 
   var checklst = new Array();
@@ -61,14 +108,12 @@
   console.log(datacdn);
   sessionStorage.setItem('fdataa',datacdn);
 });
-  
+
     var upass,uname;
 	var unamepass = firebase.database().ref().child("Login");
     unamepass.on('value', function(namee){
             uname = namee.val().Username; 
             upass = namee.val().Password;
-            var sessiondata = uname + "," + upass;
-    sessionStorage.setItem('logind',sessiondata);
      });
 
 	var lpage = new Array();
@@ -86,25 +131,25 @@
     var finaldel = new Array();
     finaldel = lpage.split(",");
 
-    console.log(finaldel);
-
     if (uname===finaldel[0])
     {
     	if (upass===finaldel[1])
     	{
     		document.getElementById("loginresult").innerHTML = "Logged in Successfuly as " + (uname);
-    		window.location.href = "ownerpage.html"
+    		window.location.href = "ownerpage.html";
     	}
 
     	else
     	{
             document.getElementById("loginresult").innerHTML = "Incorrect Password";
+            window.location.href = "login.html";
     	}
     }
 
     else
     {
     	document.getElementById("loginresult").innerHTML = "Incorrect Username";
+    	window.location.href = "login.html";
     }
 
     }
@@ -112,3 +157,5 @@
 
 
 </script>
+
+-->
