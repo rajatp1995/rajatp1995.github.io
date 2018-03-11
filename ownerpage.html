@@ -1,21 +1,66 @@
 <html>
 <head>
   <title>Smart Shopping Cart</title>
+  <script type="text/javascript">
+  var config = {
+    apiKey: "AIzaSyCn_P-dbq07eDimEGzS8qMGObW1JP_U4ts",
+    authDomain: "projectdatabase-d5dcc.firebaseapp.com",
+    databaseURL: "https://projectdatabase-d5dcc.firebaseio.com",
+    projectId: "projectdatabase-d5dcc",
+    storageBucket: "projectdatabase-d5dcc.appspot.com",
+    messagingSenderId: "289821114496"
+  };
+    firebase.initializeApp(config);
+ </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <style>
+  <script type="text/javascript">
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var phoneNumber = user.phoneNumber;
+            var providerData = user.providerData;
+            user.getIdToken().then(function(accessToken) {
+              document.getElementById('account-details').textContent = JSON.stringify({
+                displayName: displayName,
+                photoURL: photoURL
+              }, null, '  ');
+            });
+          } else {
+            document.getElementById('account-details').textContent = 'null';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+
+      window.addEventListener('load', function() {
+        initApp()
+      });
+    </script>
+
+  <style>
        table, td {
        border: 1px solid black;
        }
+  </style>
 
-    </style>
 </head>
 <body>
 	<div class="container">
+    Logged in as : <br>
+    <div id="account-details"></div>
+    <br>
 	<h3><center>Add/Remove Items</center></h3>
   <table id="myTablee" style="width:100% ; background-color: #C0C0C0">
   </table><br>
@@ -51,22 +96,8 @@
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
 
-<script type="text/javascript">
-	var config = {
-    apiKey: "AIzaSyCn_P-dbq07eDimEGzS8qMGObW1JP_U4ts",
-    authDomain: "projectdatabase-d5dcc.firebaseapp.com",
-    databaseURL: "https://projectdatabase-d5dcc.firebaseio.com",
-    projectId: "projectdatabase-d5dcc",
-    storageBucket: "projectdatabase-d5dcc.appspot.com",
-    messagingSenderId: "289821114496"
-  };
-    firebase.initializeApp(config);
-
- </script>
-
  <script type="text/javascript">
 
-    var userp = sessionStorage.getItem('logindel');
     var firebdataa = sessionStorage.getItem('fdataa');
 
       console.log(firebdataa);
