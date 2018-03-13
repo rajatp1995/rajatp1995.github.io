@@ -477,7 +477,7 @@ clist = firebdata.split(',');
 var myDiv = document.getElementById("div2");
 for (var i = 0; i < clist.length-1; i++) 
 {
-    if (clist[i]==="Path" || clist[i]==="Directions" || clist[i]==="Login")
+    if (clist[i]==="Path" || clist[i]==="Directions" || clist[i]==="Dir")
     {
       continue;
     }
@@ -771,6 +771,10 @@ else if((fpath[cd+1])===(fpath[cd+3])&&(fpath[cd])>(fpath[cd+2]))
 }
 cd=cd+2;
 } 
+
+      firebase.database().ref('Dir/').set({
+      dir: str
+      });
 
       var dirgrid = new Array();
       for (var g=0;g<dpath.length;g++)

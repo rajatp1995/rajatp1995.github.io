@@ -1,7 +1,41 @@
+
 <html>
 <head>
 <head>
-  <title>Smart Shopping Cart</title>
+<title>Smart Shopping Cart</title>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCn_P-dbq07eDimEGzS8qMGObW1JP_U4ts",
+    authDomain: "projectdatabase-d5dcc.firebaseapp.com",
+    databaseURL: "https://projectdatabase-d5dcc.firebaseio.com",
+    projectId: "projectdatabase-d5dcc",
+    storageBucket: "projectdatabase-d5dcc.appspot.com",
+    messagingSenderId: "289821114496"
+  };
+  firebase.initializeApp(config);
+
+  var checklst = new Array();
+  var datacdn = new Array();
+  var complist = firebase.database().ref();
+  complist.on('value', function(namee){
+  namee.forEach(function(childSnapshot) {
+        var key = childSnapshot.key;
+        var cdatan = childSnapshot.val().name;
+        var cdatax = childSnapshot.val().xval;
+        var cdatay = childSnapshot.val().yval;
+        checklst = checklst + key + ",";
+        sessionStorage.setItem('fbase',checklst);
+        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + "-";
+    });
+  console.log(datacdn);
+  sessionStorage.setItem('fdataa',datacdn);
+});
+</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -33,42 +67,6 @@
 </body>
 </html>
 
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
-
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCn_P-dbq07eDimEGzS8qMGObW1JP_U4ts",
-    authDomain: "projectdatabase-d5dcc.firebaseapp.com",
-    databaseURL: "https://projectdatabase-d5dcc.firebaseio.com",
-    projectId: "projectdatabase-d5dcc",
-    storageBucket: "projectdatabase-d5dcc.appspot.com",
-    messagingSenderId: "289821114496"
-  };
-  firebase.initializeApp(config);
-
-  var checklst = new Array();
-  var datacdn = new Array();
-  var complist = firebase.database().ref();
-  complist.on('value', function(namee){
-  namee.forEach(function(childSnapshot) {
-        var key = childSnapshot.key;
-        var cdatan = childSnapshot.val().name;
-        var cdatax = childSnapshot.val().xval;
-        var cdatay = childSnapshot.val().yval;
-        checklst = checklst + key + ",";
-        sessionStorage.setItem('fbase',checklst);
-        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + "-";
-    });
-  console.log(datacdn);
-  sessionStorage.setItem('fdataa',datacdn);
-});
- 
-</script>
-
 <script type="text/javascript">	
 
 	document.getElementById("myButton").onclick = function () {
@@ -86,7 +84,4 @@
     }
     sessionStorage.setItem('cartnumber', textu);
     }
-
-    
-
 </script>
