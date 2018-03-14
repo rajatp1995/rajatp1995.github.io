@@ -29,7 +29,7 @@
 <button onclick="myFunction()">Generate Path</button> 
 &nbsp; 
 &nbsp; 
-<button id="refButton" class="float-left submit-button" >Refresh List</button>
+<button id="refButton" class="float-left submit-button" >End Shopping</button>
 <div id="div1">
 </div>
 <br>
@@ -467,6 +467,7 @@ return {
 <script type='text/javascript'>
 
 document.getElementById("refButton").onclick = function () {
+firebase.database().ref().child("Path").remove();
 location.href = "astaralgo.html";
 };
 
