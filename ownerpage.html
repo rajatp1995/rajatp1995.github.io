@@ -60,8 +60,7 @@
   &nbsp;
   </form>
   <button id="refButtonn" class="float-left submit-button" >Refresh</button>
-  <br><br>
-  <button onclick="lout()">Log out</button>
+  <br>
 </div>
 </body>
 </html>
@@ -175,13 +174,5 @@
     console.log(ddata);
     firebase.database().ref().child(ddata).remove();
     } 
-
-function lout() {
-    firebase.auth().signOut().then(function() {
-       window.location = "index.html"
-    }).catch(function(error) {
-       // An error happened.
-    });
-  }
 
 </script>

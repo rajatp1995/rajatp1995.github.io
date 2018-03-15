@@ -78,6 +78,9 @@
 &nbsp; 
 &nbsp; 
 <button id="refButton" class="float-left submit-button" >End Shopping</button>
+&nbsp; 
+&nbsp; 
+<button onclick="lout()">Log out</button>
 <div id="div1">
 </div>
 <br>
@@ -535,6 +538,13 @@ namee.forEach(function(childSnapshot) {
         var childData = childSnapshot.val();
     });
   });
+
+function lout() {
+    firebase.auth().signOut().then(function() {
+       window.location = "index.html"
+    }).catch(function(error) {
+    });
+  }
 
 function myFunction() 
 {
