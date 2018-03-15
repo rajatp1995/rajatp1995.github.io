@@ -39,6 +39,7 @@
             var providerData = user.providerData;
             user.getIdToken().then(function(accessToken) {
               document.getElementById('account-details').textContent = displayName;
+              sessionStorage.setItem('usr',email);
             });
           } else {
             document.getElementById('account-details').textContent = 'null';
