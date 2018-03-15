@@ -68,6 +68,7 @@
   <div id="account-details"></div></b>
   <br>
   <marquee><b><i>Choose your grocery list and generate path</i></b></marquee>
+  <br>
   <p id="cn"> </p>
 <b>Select your grocery list :</b>
 <br>
@@ -501,13 +502,7 @@ document.getElementById("refButton").onclick = function () {
 firebase.database().ref().child("Path").remove();
 firebase.database().ref().child("Dir").remove();
 firebase.database().ref().child("Directions").remove();
-refreshp();
 };
-
-function refreshp()
-{
-	location.href = "astaralgo.html";
-}
 
 var firebdata = sessionStorage.getItem('fbase');
 var clist = new Array();
