@@ -24,34 +24,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <script type="text/javascript">
-      initApp = function() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            // User is signed in.
-            var displayName = user.displayName;
-            var email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var uid = user.uid;
-            var phoneNumber = user.phoneNumber;
-            var providerData = user.providerData;
-            user.getIdToken().then(function(accessToken) {
-              document.getElementById('account-details').textContent = displayName;
-            });
-          } else {
-            document.getElementById('account-details').textContent = 'null';
-          }
-        }, function(error) {
-          console.log(error);
-        });
-      };
-
-      window.addEventListener('load', function() {
-        initApp()
-      });
-    </script>
-
   <style>
        table, td {
        border: 1px solid black;
@@ -62,8 +34,6 @@
 <body>
 	<div class="container">
     <br>
-    <b>Logged in as : 
-    <div id="account-details"></div></b>
 	<h3><center>Add/Remove Items</center></h3>
   <table id="myTablee" style="width:100% ; background-color: #C0C0C0">
   </table><br>

@@ -1,0 +1,97 @@
+<html>
+<head>
+
+  <title> Smart Shopping Cart </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<br>
+		<h3><b> Admin Login </b></h3>
+		<br><br>
+    <form id="loginpage">
+    	<input type="text" name="nid" placeholder="Enter Username"><br><br>
+    	<input type="password" name="pid" placeholder="Enter Password"><br><br>
+    </form>
+    <button onclick="verifydata()">Login</button>
+    <br><br>
+    <p id="loginresult"> </p>
+</body>
+</div>
+</html>
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
+
+<script type="text/javascript">
+	var config = {
+    apiKey: "AIzaSyCn_P-dbq07eDimEGzS8qMGObW1JP_U4ts",
+    authDomain: "projectdatabase-d5dcc.firebaseapp.com",
+    databaseURL: "https://projectdatabase-d5dcc.firebaseio.com",
+    projectId: "projectdatabase-d5dcc",
+    storageBucket: "projectdatabase-d5dcc.appspot.com",
+    messagingSenderId: "289821114496"
+  };
+    firebase.initializeApp(config);
+
+ </script>
+
+<script type="text/javascript">
+
+    var upass,uname;
+	var unamepass = firebase.database().ref().child("Login");
+    unamepass.on('value', function(namee){
+            uname = namee.val().Username; 
+            upass = namee.val().Password;
+            var sessiondata = uname + "," + upass;
+    sessionStorage.setItem('logind',sessiondata);
+     });
+
+	var lpage = new Array();
+
+    function verifydata() 
+    {
+    var x = document.getElementById("loginpage");
+    var i;
+    for (i = 0; i < x.length ;i++) {
+        lpage += x.elements[i].value + ",";
+    }
+    sessionStorage.setItem('logindel', lpage);
+    console.log(lpage);
+
+    var finaldel = new Array();
+    finaldel = lpage.split(",");
+
+    console.log(finaldel);
+
+    if (uname===finaldel[0])
+    {
+    	if (upass===finaldel[1])
+    	{
+    		document.getElementById("loginresult").innerHTML = "Logged in Successfuly as " + (uname);
+    		window.location.href = "ownerpage.html"
+    	}
+
+    	else
+    	{
+            document.getElementById("loginresult").innerHTML = "Incorrect Password";
+    	}
+    }
+
+    else
+    {
+    	document.getElementById("loginresult").innerHTML = "Incorrect Username";
+    }
+
+    }
+
+
+
+</script>

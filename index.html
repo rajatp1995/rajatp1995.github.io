@@ -49,7 +49,7 @@
 <br>
 <marquee><b><i> Welcome to Smart Shopping Cart Interface, start by connecting your shopping cart.</i></b></marquee>
 <br><br>
-<form action="astaralgo.html" id="fish">
+<form action="login.html" id="fm1">
 	<input type="text" name="cartno" placeholder="Enter Cart Number">
 	<br>
 	<br>
@@ -59,10 +59,9 @@
 
 </form>
 
-<button id="myButton" class="float-left submit-button" >Login into Super Mart</button>
+<button id="myButton" class="float-left submit-button" >Administrator Controls</button>
 <br>
 <br>
-<!--<button onclick="startt()">Find Bluetooth device</button>-->
 </div>
 </body>
 </html>
@@ -70,14 +69,14 @@
 <script type="text/javascript">	
 
 	document.getElementById("myButton").onclick = function () {
-    location.href = "login.html";
+    location.href = "login_admin.html";
     };
 
 	var textu = "";
 	var myData;
 
 	function myFunctio() {
-    var x = document.getElementById("fish");
+    var x = document.getElementById("fm1");
     var i;
     for (i = 0; i < x.length ;i++) {
         textu += x.elements[i].value;

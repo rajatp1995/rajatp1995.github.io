@@ -1,3 +1,8 @@
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +12,46 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script>
+  var config = {
+    apiKey: "AIzaSyCn_P-dbq07eDimEGzS8qMGObW1JP_U4ts",
+    authDomain: "projectdatabase-d5dcc.firebaseapp.com",
+    databaseURL: "https://projectdatabase-d5dcc.firebaseio.com",
+    projectId: "projectdatabase-d5dcc",
+    storageBucket: "projectdatabase-d5dcc.appspot.com",
+    messagingSenderId: "289821114496"
+  };
+  firebase.initializeApp(config);
+  </script>
+
+  <script type="text/javascript">
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var phoneNumber = user.phoneNumber;
+            var providerData = user.providerData;
+            user.getIdToken().then(function(accessToken) {
+              document.getElementById('account-details').textContent = displayName;
+            });
+          } else {
+            document.getElementById('account-details').textContent = 'null';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+
+      window.addEventListener('load', function() {
+        initApp()
+      });
+   </script>
 
   <style>
   table, td {
@@ -18,6 +63,9 @@
   <div class="container">
   <br>
   <b><i><center>Smart Shopping Cart</center></i></b>
+  <br>
+  <b>Logged in as : 
+  <div id="account-details"></div></b>
   <br>
   <marquee><b><i>Choose your grocery list and generate path</i></b></marquee>
   <p id="cn"> </p>
@@ -41,26 +89,6 @@
 </div>
 </body>
 </html>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
-
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCn_P-dbq07eDimEGzS8qMGObW1JP_U4ts",
-    authDomain: "projectdatabase-d5dcc.firebaseapp.com",
-    databaseURL: "https://projectdatabase-d5dcc.firebaseio.com",
-    projectId: "projectdatabase-d5dcc",
-    storageBucket: "projectdatabase-d5dcc.appspot.com",
-    messagingSenderId: "289821114496"
-  };
-  firebase.initializeApp(config);
- 
-</script>
 
 <script type='text/javascript'>
 
@@ -478,7 +506,7 @@ clist = firebdata.split(',');
 var myDiv = document.getElementById("div2");
 for (var i = 0; i < clist.length-1; i++) 
 {
-    if (clist[i]==="Path" || clist[i]==="Directions" || clist[i]==="Dir")
+    if (clist[i]==="Path" || clist[i]==="Directions" || clist[i]==="Dir" || clist[i]==="Login")
     {
       continue;
     }
