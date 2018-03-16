@@ -86,6 +86,9 @@
 </div>
 <br>
 <button onclick="genbill()">Add to Shopping List</button> 
+&nbsp;
+&nbsp;
+<button onclick="plist()">Price List</button> 
 <br>
 <form id="billgen">
 <div id="my_div"></div>
@@ -563,6 +566,11 @@ function lout() {
     }).catch(function(error) {
     });
   }
+
+function plist()
+{
+  window.location="rate_card.html";
+}
 
  var choices = [];
  function genbill()

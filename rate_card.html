@@ -1,0 +1,84 @@
+<html>
+<head>
+  <title>Smart Shopping Cart</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <style>
+       table, td {
+       border: 1px solid black;
+       }
+
+       body {
+       height: 200px;
+       background: red; 
+       background: linear-gradient(rgba(0,0,0,0) , rgba(255,0,0,0.7), rgba(0,0,255,0.7)); 
+       }
+
+  </style>
+
+</head>
+<body>
+	<div class="container">
+    <br>
+	<h3><center><b>Price List</b></center></h3>
+  <br>
+  <table id="myTablee" style="width:100% ; background-color: #C0C0C0">
+  </table>
+  <br>
+</div>
+</body>
+</html>
+
+ <script type="text/javascript">
+
+    var firebdataa = sessionStorage.getItem('fdataa');
+
+      console.log(firebdataa);
+
+      var cllist = new Array();
+      var cllist1 = new Array();
+      cllist = firebdataa.split('-');
+
+      for(var t=0;t<cllist.length-1;t++)
+      {
+          cllist1[t] = cllist[t].split(",");
+      }
+
+      var table = document.getElementById("myTablee");
+
+      for(var t=-1;t<cllist1.length;t++)
+      {
+
+        var row = table.insertRow(t+1);
+
+        if (t===-1)
+        {
+          var cell1 = row.insertCell(0);
+          cell1.innerHTML = "<center>" + "<b>" + "Price per unit" + "</center>" + "</b>";
+          cell1.style.backgroundColor = "orange";
+
+          var cell2 = row.insertCell(0);
+          cell2.innerHTML = "<center>" + "<b>" + "Available Items" + "</center>" + "</b>";
+          cell2.style.backgroundColor = "orange";
+
+          continue;
+        }
+
+        if (cllist1[t][0]==="undefined")
+        {
+          continue;
+        }
+        else
+        {
+          var cell1 = row.insertCell(0);
+          cell1.innerHTML = "<center>" + cllist1[t][3] + "</center>";
+
+          var cell2 = row.insertCell(0);
+          cell2.innerHTML = "<center>" + cllist1[t][0] + "</center>";
+        }
+      }
+</script>
