@@ -39,11 +39,11 @@
   </table><br>
   <b>To add a new item :</b><br>
 	<form id="dataform">
-		<input type="text" name="pname" placeholder="Product Name">
+		<input type="text" name="pname" placeholder="Product Name" required>
     <br>
-		<input type="text" name="px" placeholder="X-Coordinate">
+		<input type="text" name="px" placeholder="X-Coordinate" required>
     <br>
-		<input type="text" name="py" placeholder="Y-Coordinate">
+		<input type="text" name="py" placeholder="Y-Coordinate" required>
     <br><br>
 		<button onclick="saveData()">Save Data</button>
     &nbsp;
@@ -53,7 +53,7 @@
   <br><br>
   <b>To delete any item :</b><br>
   <form id="dataformdel">
-  <input type="text" name="pname" placeholder="Product Name to be deleted">
+  <input type="text" name="pname" placeholder="Product Name to be deleted" required>
   <br><br>
   <button onclick="delData()">Delete Data</button>
   &nbsp;
@@ -122,12 +122,13 @@
         }
       }
 
-    document.getElementById("refButton").onclick = function () {
-    location.href = "index.html";
+    document.getElementById("refButton").onclick = function () 
+    {
+    location.href = "ownerpage.html";
     };
 
     document.getElementById("refButtonn").onclick = function () {
-    location.href = "index.html";
+    location.href = "ownerpage.html";
     };
 
   	var pdata = "";
@@ -151,7 +152,6 @@
     }
     proddata = pdata.split(",");
     fdata = proddata.slice(0,3);
-    console.log(fdata);
 
     var a = parseInt(fdata[1]);
     var b = parseInt(fdata[2]);
@@ -162,6 +162,17 @@
     yval: b
     });
 
+    var datacdn = new Array();
+    var complist = firebase.database().ref();
+    complist.on('value', function(namee){
+    namee.forEach(function(childSnapshot) {
+        var cdatan = childSnapshot.val().name;
+        var cdatax = childSnapshot.val().xval;
+        var cdatay = childSnapshot.val().yval;
+        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + "-";
+    });
+    sessionStorage.setItem('fdataa',datacdn);
+    });
     }  
 
   function delData() {
@@ -171,8 +182,19 @@
     for (i = 0; i < x.length ;i++) {
         ddata += x.elements[i].value;
     }
-    console.log(ddata);
     firebase.database().ref().child(ddata).remove();
+
+    var datacdn = new Array();
+    var complist = firebase.database().ref();
+    complist.on('value', function(namee){
+    namee.forEach(function(childSnapshot) {
+        var cdatan = childSnapshot.val().name;
+        var cdatax = childSnapshot.val().xval;
+        var cdatay = childSnapshot.val().yval;
+        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + "-";
+    });
+    sessionStorage.setItem('fdataa',datacdn);
+    });
     } 
 
 </script>

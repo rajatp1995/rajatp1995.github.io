@@ -650,8 +650,6 @@ totalpath = [0,0];
           newpath[k] = pathdis1[k].value;
       }
 
-      console.log(newpath);
-
       ka = newpath.length;
       ma = 0;
       aa = 0;
@@ -665,13 +663,9 @@ totalpath = [0,0];
                    itemname.on('value', function(namee){
                     itemnm = namee.val(); 
                    });
-                   console.log(itemnm);
 
                    if(newpath[ma]===itemnm)
                    {
-
-                  console.log("Value found");
-
                    var itemx = firebase.database().ref().child(newpath[ma]).child("xval");
                    itemx.on('value', function(xvalue){
                     xv = xvalue.val(); 
@@ -682,12 +676,11 @@ totalpath = [0,0];
                    yv = yvalue.val();
                     });
 
-
                    if (aa===xv && bb===yv)
                    {
                         var para = document.createElement(pp[jj]);
                         var nodelbr1 = document.createElement("br");
-                        var node = document.createTextNode("Path to " + newpath[ma] + " : Same location as " + newpath[ma-1]);
+                        var node = document.createTextNode(newpath[ma] + " is at same location as of " + newpath[ma-1]);
                         var nodelbr2 = document.createElement("br");
                         para.appendChild(nodelbr1);
                         para.appendChild(node);
@@ -708,8 +701,8 @@ totalpath = [0,0];
                  var result = astar.search(graph, start, end);
                  var para = document.createElement(pp[jj]);
                  var nodelbr1 = document.createElement("br");
-                 var node = document.createTextNode("Path to " + newpath[ma] + " : ");
-                 var noderes = document.createTextNode(result);
+                 var node = document.createTextNode(newpath[ma] + " is located at ");
+                 var noderes = document.createTextNode("[" + xv + "," + yv + "]");
                  var nodelbr2 = document.createElement("br");
                  para.appendChild(nodelbr1);
                  para.appendChild(node);
@@ -723,12 +716,10 @@ totalpath = [0,0];
                  bb = yv;
                  jj = 0;
 
-                 totalpath =totalpath + "," + result;
-
+                 totalpath = totalpath + "," + result;
               }
         else
         {
-        console.log("Else segment");
         jj++;
         }
            
