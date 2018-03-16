@@ -36,6 +36,12 @@
        .redtext {
         color: red;
        }
+
+       body {
+        height: 200px;
+        background: red; 
+        background: linear-gradient(rgba(0,0,0,0.4) , rgba(255,0,0,0.4), rgba(0,0,255,0.4)); 
+        }
   </style>
 
 </head>
@@ -52,6 +58,8 @@
 		<input type="text" name="px" placeholder="X-Coordinate" required>
     <br>
 		<input type="text" name="py" placeholder="Y-Coordinate" required>
+    <br>
+    <input type="text" name="pz" placeholder="Price per unit" required>
     <br><br>
 		<button onclick="saveData()">Save Data</button>
 	</form>
@@ -96,18 +104,21 @@
 
         if (t===-1)
         {
-
           var cell1 = row.insertCell(0);
-          cell1.innerHTML = "<center>" + "<b>" + "Y-Coordinate" + "</center>" + "</b>";
+          cell1.innerHTML = "<center>" + "<b>" + "Price per unit" + "</center>" + "</b>";
           cell1.style.backgroundColor = "orange";
 
           var cell2 = row.insertCell(0);
-          cell2.innerHTML = "<center>" + "<b>"  + "X-Coordinate" + "</center>" + "</b>";
+          cell2.innerHTML = "<center>" + "<b>" + "Y-Coordinate" + "</center>" + "</b>";
           cell2.style.backgroundColor = "orange";
 
           var cell3 = row.insertCell(0);
-          cell3.innerHTML = "<center>" + "<b>" + "Available Items" + "</center>" + "</b>";
+          cell3.innerHTML = "<center>" + "<b>"  + "X-Coordinate" + "</center>" + "</b>";
           cell3.style.backgroundColor = "orange";
+
+          var cell4 = row.insertCell(0);
+          cell4.innerHTML = "<center>" + "<b>" + "Available Items" + "</center>" + "</b>";
+          cell4.style.backgroundColor = "orange";
 
           continue;
         }
@@ -119,13 +130,16 @@
         else
         {
           var cell1 = row.insertCell(0);
-          cell1.innerHTML = "<center>" + cllist1[t][2] + "</center>";
+          cell1.innerHTML = "<center>" + cllist1[t][3] + "</center>";
 
           var cell2 = row.insertCell(0);
-          cell2.innerHTML = "<center>" + cllist1[t][1] + "</center>";
+          cell2.innerHTML = "<center>" + cllist1[t][2] + "</center>";
 
           var cell3 = row.insertCell(0);
-          cell3.innerHTML = "<center>" + cllist1[t][0] + "</center>";
+          cell3.innerHTML = "<center>" + cllist1[t][1] + "</center>";
+
+          var cell4 = row.insertCell(0);
+          cell4.innerHTML = "<center>" + cllist1[t][0] + "</center>";
         }
       }
 
@@ -158,15 +172,17 @@
         pdata += x.elements[i].value + ",";
     }
     proddata = pdata.split(",");
-    fdata = proddata.slice(0,3);
+    fdata = proddata.slice(0,4);
 
     var a = parseInt(fdata[1]);
     var b = parseInt(fdata[2]);
+    var c = parseInt(fdata[3]);
 
     firebase.database().ref(fdata[0]).set({
     name: fdata[0],
     xval: a,
-    yval: b
+    yval: b,
+    price: c
     });
 
     var datacdn = new Array();
@@ -176,7 +192,8 @@
         var cdatan = childSnapshot.val().name;
         var cdatax = childSnapshot.val().xval;
         var cdatay = childSnapshot.val().yval;
-        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + "-";
+        var cdataz = childSnapshot.val().price;
+        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + cdataz + "," +  "-";
     });
     sessionStorage.setItem('fdataa',datacdn);
     });
@@ -198,7 +215,8 @@
         var cdatan = childSnapshot.val().name;
         var cdatax = childSnapshot.val().xval;
         var cdatay = childSnapshot.val().yval;
-        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + "-";
+        var cdataz = childSnapshot.val().price;
+        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + cdataz + "," +  "-";
     });
     sessionStorage.setItem('fdataa',datacdn);
     });

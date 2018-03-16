@@ -32,15 +32,23 @@
         var cdatan = childSnapshot.val().name;
         var cdatax = childSnapshot.val().xval;
         var cdatay = childSnapshot.val().yval;
+        var cdataz = childSnapshot.val().price;
         checklst = checklst + key + ",";
         sessionStorage.setItem('fbase',checklst);
-        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + "-";
+        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + cdataz + "," +  "-";
     });
   console.log(datacdn);
   sessionStorage.setItem('fdataa',datacdn);
   });
   </script>
 </head>
+<style type="text/css">
+    body {
+    height: 200px;
+    background: red; 
+    background: linear-gradient(rgba(0,0,0,0) , rgba(255,0,0,0.5), rgba(0,0,255,0.5)); 
+    }
+</style>
 
 <body>
 	<div class="container">
@@ -51,7 +59,7 @@
     	<input type="text" name="nid" placeholder="Enter Username" required><br><br>
     	<input type="password" name="pid" placeholder="Enter Password" required><br><br>
     </form>
-    <button onclick="verifydata()">Login</button>
+    <button onclick="verifydata()">Login into Database</button>
     <br><br>
     <p id="loginresult"> </p>
 </body>

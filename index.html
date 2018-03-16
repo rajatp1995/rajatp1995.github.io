@@ -1,7 +1,6 @@
 
 <html>
 <head>
-<head>
 <title>Smart Shopping Cart</title>
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
@@ -32,7 +31,7 @@
         var cdataz = childSnapshot.val().price;
         checklst = checklst + key + ",";
         prices = prices + cdataz + ",";
-        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + "-";
+        datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + cdataz + "," +  "-";
     });
   console.log(datacdn);
   sessionStorage.setItem('fdataa',datacdn);
@@ -46,7 +45,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-</head>
+<style type="text/css">
+	body {
+    height: 200px;
+    background: red; 
+    background: linear-gradient(white , red, blue); 
+}
+</style>
 <body>
 <div class="container">
 <h3><center><u>Smart Cart</u></center></h3>
