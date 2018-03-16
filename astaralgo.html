@@ -576,10 +576,10 @@ function lout() {
   }
   for (var r=1;r<=choices.length;r++)
   {
-    my_div.innerHTML = my_div.innerHTML +"<br>Enter quantity for " + choices[r-1] + " : <input type='text' name='mytext'>"
+    my_div.innerHTML = my_div.innerHTML +"<br>Enter quantity of " + choices[r-1] + " : <input type='text' name='mytext'><br>"
     if (r===choices.length)
     {
-      my_div1.innerHTML = my_div1.innerHTML +"<button onclick='myFunction()'> Generate Path & Bill</button> &nbsp; &nbsp; <button onclick='refButton()'>End Shopping</button> &nbsp; &nbsp; <button onclick='lout()'>Log out</button>"
+      my_div1.innerHTML = my_div1.innerHTML +"<button onclick='myFunction()'> Proceed</button> &nbsp; &nbsp; <button onclick='refButton()'>End Shopping</button> &nbsp; &nbsp; <button onclick='lout()'>Log out</button>"
     }
   }
  }
