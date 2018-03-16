@@ -46,20 +46,19 @@
 		<input type="text" name="py" placeholder="Y-Coordinate" required>
     <br><br>
 		<button onclick="saveData()">Save Data</button>
-    &nbsp;
-    &nbsp;
 	</form>
-  <button id="refButton" class="float-left submit-button" >Refresh</button>
   <br><br>
   <b>To delete any item :</b><br>
   <form id="dataformdel">
   <input type="text" name="pname" placeholder="Product Name to be deleted" required>
   <br><br>
   <button onclick="delData()">Delete Data</button>
-  &nbsp;
-  &nbsp;
   </form>
-  <button id="refButtonn" class="float-left submit-button" >Refresh</button>
+  <br>
+  <button id="refButtonn" class="float-left submit-button" >Refresh Page</button>
+  &nbsp;
+  &nbsp;
+  <button id="goback" class="float-left submit-button" >Log out</button>
   <br>
 </div>
 </body>
@@ -122,9 +121,9 @@
         }
       }
 
-    document.getElementById("refButton").onclick = function () 
+    document.getElementById("goback").onclick = function () 
     {
-    location.href = "ownerpage.html";
+    location.href = "index.html";
     };
 
     document.getElementById("refButtonn").onclick = function () {
