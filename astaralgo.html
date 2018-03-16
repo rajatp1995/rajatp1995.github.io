@@ -58,6 +58,15 @@
   table, td {
     border: 1px solid black;
   }
+
+  .bluetext {
+    color: blue;
+  }
+
+  .redtext {
+    color: red;
+  }
+
 </style>
 </head>
 <body>
@@ -76,15 +85,21 @@
 <div id="div2">
 </div>
 <br>
-<button onclick="myFunction()">Generate Path</button> 
-&nbsp; 
-&nbsp; 
-<button id="refButton" class="float-left submit-button" >End Shopping</button>
-&nbsp; 
-&nbsp; 
-<button onclick="lout()">Log out</button>
-<div id="div1">
-</div>
+<button onclick="genbill()">Add to Shopping List</button> 
+<br>
+<form id="billgen">
+<div id="my_div"></div>
+</form>
+<br>
+<div id="my_div1"></div>
+<br>
+<table id="myTablebill" style="width:100% ; ; background-color: #C0C0C0">
+</table>
+<br>
+<b><h4><p id="totalcost" class="bluetext"></p></h4></b>
+<br>
+<center><h3><p id="pathstart" class="redtext"></p></h3></center>
+<div id="div1"></div>
 <br>
 <!--<p id="tp"> </p>
 <p id="finaldir"> </p> -->
@@ -499,10 +514,10 @@ return {
 
 <script type='text/javascript'>
 
-document.getElementById("refButton").onclick = function () {
-firebase.database().ref().child("Path").remove();
-firebase.database().ref().child("Dir").remove();
-firebase.database().ref().child("Directions").remove();
+function refButton(){
+   firebase.database().ref().child("Path").remove();
+   firebase.database().ref().child("Dir").remove();
+   firebase.database().ref().child("Directions").remove();
 };
 
 var firebdata = sessionStorage.getItem('fbase');
@@ -549,17 +564,97 @@ function lout() {
     });
   }
 
+ var choices = [];
+ function genbill()
+ {
+  var els = document.getElementsByName('shoplist');
+  for (var i=0;i<els.length;i++)
+  {
+  if ( els[i].checked ) {
+    choices.push(els[i].value);
+     }
+  }
+  for (var r=1;r<=choices.length;r++)
+  {
+    my_div.innerHTML = my_div.innerHTML +"<br>Enter quantity for " + choices[r-1] + " : <input type='text' name='mytext'>"
+    if (r===choices.length)
+    {
+      my_div1.innerHTML = my_div1.innerHTML +"<button onclick='myFunction()'> Generate Path & Bill</button> &nbsp; &nbsp; <button onclick='refButton()'>End Shopping</button> &nbsp; &nbsp; <button onclick='lout()'>Log out</button>"
+    }
+  }
+ }
+
 function myFunction() 
 {
-
   var choices = [];
   var els = document.getElementsByName('shoplist');
   for (var i=0;i<els.length;i++){
   if ( els[i].checked ) {
     choices.push(els[i].value);
+    }
   }
-}
-console.log(choices);
+
+  var pcs = sessionStorage.getItem('price');
+  var pcsf = pcs.split(",");
+  var bil = new Array();
+  for (var c=0;c<pcsf.length;c++)
+  {
+    if (clist[c]==="Path" || clist[c]==="Directions" || clist[c]==="Dir" || clist[c]==="Login")
+    {
+      continue;
+    }
+
+    bil.push({
+      pcsf: pcsf[c],
+      itm: clist[c]
+    });
+  }
+  console.log(bil);
+
+    var textu = new Array();
+    var x = document.getElementById("billgen");
+    var i;
+    for (i = 0; i < x.length ;i++) {
+        textu.push(x.elements[i].value);
+    }
+
+    var table = document.getElementById("myTablebill");
+    var row = table.insertRow(0);
+
+    var cell1 = row.insertCell(0);
+    cell1.innerHTML = "<center>" + "<b>" + "Cost per unit" + "</center>" + "</b>";
+    cell1.style.backgroundColor = "red";
+
+    var cell2 = row.insertCell(0);
+    cell2.innerHTML = "<center>" + "<b>"  + "Quantity" + "</center>" + "</b>";
+    cell2.style.backgroundColor = "red";
+
+    var cell3 = row.insertCell(0);
+    cell3.innerHTML = "<center>" + "<b>"  + "Product" + "</center>" + "</b>";
+    cell3.style.backgroundColor = "red";
+
+    var table = document.getElementById("myTablebill");
+    var cost = 0;
+    for (var b=0;b<choices.length;b++)
+    {
+      for (var d=0;d<bil.length;d++)
+      {
+      if (choices[b]===bil[d].itm)
+      {
+         var row = table.insertRow(b+1);
+         var cell1 = row.insertCell(0);
+         var cell2 = row.insertCell(1);
+         var cell3 = row.insertCell(2);
+         cell1.innerHTML = "<center>" + bil[d].itm + "</center>";
+         cell2.innerHTML = "<center>" + textu[b] + "</center>";
+         cell3.innerHTML = "<center>" + bil[d].pcsf + "</center>";
+         cost = cost + (parseInt(bil[d].pcsf) * parseInt(textu[b]));
+      }
+    }
+    }
+    document.getElementById("totalcost").innerHTML = "Your total bill is : Rs. " + cost;
+
+    document.getElementById("pathstart").innerHTML = "<b>Generated Path </b>"
 
 var graph = new Graph([
         [1,1,1,1,1,1,1],

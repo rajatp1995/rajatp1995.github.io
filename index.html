@@ -21,6 +21,7 @@
 
   var checklst = new Array();
   var datacdn = new Array();
+  var prices = new Array();
   var complist = firebase.database().ref();
   complist.on('value', function(namee){
   namee.forEach(function(childSnapshot) {
@@ -28,12 +29,15 @@
         var cdatan = childSnapshot.val().name;
         var cdatax = childSnapshot.val().xval;
         var cdatay = childSnapshot.val().yval;
+        var cdataz = childSnapshot.val().price;
         checklst = checklst + key + ",";
-        sessionStorage.setItem('fbase',checklst);
+        prices = prices + cdataz + ",";
         datacdn = datacdn + cdatan + "," + cdatax + "," + cdatay + ","  + "-";
     });
   console.log(datacdn);
   sessionStorage.setItem('fdataa',datacdn);
+  sessionStorage.setItem('price',prices);
+  sessionStorage.setItem('fbase',checklst);
 });
 </script>
   <meta charset="utf-8">
