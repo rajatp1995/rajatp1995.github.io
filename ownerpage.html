@@ -28,6 +28,14 @@
        table, td {
        border: 1px solid black;
        }
+
+       .bluetext {
+        color: blue;
+       }
+
+       .redtext {
+        color: red;
+       }
   </style>
 
 </head>
@@ -37,7 +45,7 @@
 	<h3><center>Add/Remove Items</center></h3>
   <table id="myTablee" style="width:100% ; background-color: #C0C0C0">
   </table><br>
-  <b>To add a new item :</b><br>
+  <b class="bluetext">Add a new item / Change the location of an existing item :</b><br>
 	<form id="dataform">
 		<input type="text" name="pname" placeholder="Product Name" required>
     <br>
@@ -48,18 +56,18 @@
 		<button onclick="saveData()">Save Data</button>
 	</form>
   <br><br>
-  <b>To delete any item :</b><br>
+  <b class="redtext">Remove an item :</b><br>
   <form id="dataformdel">
-  <input type="text" name="pname" placeholder="Product Name to be deleted" required>
+  <input type="text" name="pname" placeholder="Product to be removed" required>
   <br><br>
-  <button onclick="delData()">Delete Data</button>
+  <button onclick="delData()">Remove product</button>
   </form>
-  <br>
+  <br><br>
   <button id="refButtonn" class="float-left submit-button" >Refresh Page</button>
   &nbsp;
   &nbsp;
   <button id="goback" class="float-left submit-button" >Log out</button>
-  <br>
+  <br><br><br>
 </div>
 </body>
 </html>
