@@ -907,9 +907,42 @@ else if((fpath[cd+1])===(fpath[cd+3])&&(fpath[cd])>(fpath[cd+2]))
 }
 cd=cd+2;
 } 
+      var dirarray = new Array();
+      var dfbase = new Array();
+      for (var b=0;b<str.length;b++)
+      {
+        if (str[b]==="Forward")
+        {
+          dirarray[b]="1";
+        }
+        else if (str[b]==="Left")
+        {
+          dirarray[b]="2";
+        }
+        else if (str[b]==="Right")
+        {
+          dirarray[b]="3";
+        }
+        else if (str[b]==="Reverse")
+        {
+          dirarray[b]="4";
+        }
+      }
+
+      for (var w=0;w<str.length+1;w++)
+      { 
+          if (w<=(str.length-1))
+          {
+             dfbase = dfbase + dirarray[w] + ",";
+          }
+          else
+          {
+             dfbase = dfbase + "0";
+          }
+      }
 
       firebase.database().ref('Dir/').set({
-      dir: str
+      dir: dfbase
       });
 
       var dirgrid = new Array();
