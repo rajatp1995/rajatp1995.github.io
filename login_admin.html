@@ -45,8 +45,8 @@
 <style type="text/css">
     body {
     height: 200px;
-    background: red; 
-    background: linear-gradient(rgba(0,0,0,0) , rgba(255,0,0,0.5), rgba(0,0,255,0.5)); 
+    background: red;
+    background: linear-gradient(rgba(0,0,0,0) , rgba(255,0,0,0.5), rgba(0,0,255,0.5));
     }
 </style>
 
@@ -69,16 +69,16 @@
 <script type="text/javascript">
 
     var upass,uname;
-	var unamepass = firebase.database().ref().child("Login");
+	  var unamepass = firebase.database().ref().child("Login");
     unamepass.on('value', function(namee){
-            uname = namee.val().Username; 
+            uname = namee.val().Username;
             upass = namee.val().Password;
             var sessiondata = uname + "," + upass;
      });
 
 	var lpage = new Array();
 
-    function verifydata() 
+    function verifydata()
     {
     var x = document.getElementById("loginpage");
     var i;
