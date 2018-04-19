@@ -551,6 +551,7 @@ var myData = sessionStorage.getItem('cartnumber');
 console.log(myData);
 document.getElementById("cn").innerHTML = "Connected to Cart ID : " + myData;
 
+
 var compdata;
 var complist = firebase.database().ref();
 complist.on('value', function(namee){
@@ -842,7 +843,7 @@ totalpath = [0,0];
       }
 
       //document.getElementById("tp").innerHTML = "Total Path to traverse : " + pathtodisplay;
-      firebase.database().ref('Path/').set({
+      firebase.database().ref('Path/' + myData).set({
       path: totalpath
       });
 
@@ -941,7 +942,7 @@ cd=cd+2;
           }
       }
 
-      firebase.database().ref('Dir/').set({
+      firebase.database().ref('Dir/' + myData).set({
       dir: dfbase
       });
 
@@ -968,7 +969,7 @@ cd=cd+2;
       console.log(dirgrid);
 
       //document.getElementById("finaldir").innerHTML = "Directions : " + (str);
-      firebase.database().ref('Directions/').set({
+      firebase.database().ref('Directions/' + myData).set({
       directions: dirgrid
       });
 
