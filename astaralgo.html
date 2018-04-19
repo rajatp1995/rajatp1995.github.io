@@ -518,9 +518,9 @@ return {
 <script type='text/javascript'>
 
 function refButton(){
-   firebase.database().ref().child("Path").remove();
-   firebase.database().ref().child("Dir").remove();
-   firebase.database().ref().child("Directions").remove();
+   firebase.database().ref().child("Path/1234").remove();
+   firebase.database().ref().child("Dir/1234").remove();
+   firebase.database().ref().child("Directions/1234").remove();
 };
 
 var firebdata = sessionStorage.getItem('fbase');
