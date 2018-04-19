@@ -18,13 +18,12 @@ void setup() {
   Serial.begin(115200);
   
   irrecv.enableIRIn();  
-  while (!Serial)  // Wait for the serial connection to be establised.
+  while (!Serial)  
     delay(50);
   Serial.println();
   Serial.print("IRrecvDemo is now running and waiting for IR message on Pin ");
   Serial.println(RECV_PIN);
 
-  // connect to wifi.
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("connecting");
   while (WiFi.status() != WL_CONNECTED) {
@@ -34,7 +33,6 @@ void setup() {
   Serial.println();
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());
-  
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
 }
 
@@ -47,7 +45,7 @@ String token1[50];
 int a1=0,b1=0;
 
 void loop() 
-{ 
+{
   if (irrecv.decode(&results)) 
   {
   Serial.print("IR value : ");
@@ -55,12 +53,14 @@ void loop()
   Serial.println(ab);
   a1=ab/7;
   b1=(ab%7)-1;
+  if(b1<0) b1=6;
   Serial.println(a1);
   Serial.println(b1);
   
   int i=0,j=0;
   FirebaseObject pth = Firebase.get("Path");
-  fpath = pth.getString("path");
+  fpath = pth.getString("1234/path");
+  Serial.println(fpath);
   int n = fpath.length();
   String path[n];
   char path_array[n+1]; 
@@ -83,7 +83,7 @@ void loop()
     }
 
   FirebaseObject dir = Firebase.get("Dir");
-  fdir = dir.getString("dir");
+  fdir = dir.getString("1234/dir");
   int m = fdir.length();
   String directions[m];
   char dir_array[m+1]; 
