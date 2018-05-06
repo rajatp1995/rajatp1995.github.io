@@ -67,12 +67,49 @@
     color: red;
   }
 
+          .containerr{
+        width: 100%;
+        margin: 0 auto; /* Center the DIV horizontally */
+    }
+    .fixed-header{
+        width: 100%;     
+        background: black;
+        padding: 12px 0;
+        color: #fff;
+
+    }
+        .fixed-footer{
+        width: 100%;   
+        background: black;
+        padding: 8px 0;
+        color: #fff;
+    }
+    .fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    }  
+
+    button {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+}
+
 </style>
 </head>
 <body>
+        <div class="fixed-header">
+  <div class="containerr"><h4><center><u>Smart Shopping Cart</u></center></h4></div>        
+  </div>
   <div class="container">
-  <br>
-  <b><i><center>Smart Shopping Cart</center></i></b>
   <br>
   <b>Logged in as : 
   <div id="account-details"></div></b>
@@ -109,6 +146,9 @@
 <table id="myTable" style="width:100% ; ; background-color: #C0C0C0">
 </table>
 <br>
+</div>
+      <div class="fixed-footer">
+<div class="containerr"><h6><center>Copyright &copy; 2018 Smart Shopping Cart</center></h6></div>        
 </div>
 </body>
 </html>

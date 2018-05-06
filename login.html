@@ -44,12 +44,55 @@
            background: red; 
            background: linear-gradient(white , white, aqua); 
         }
+
+                .containerr{
+        width: 100%;
+        margin: 0 auto; /* Center the DIV horizontally */
+    }
+    .fixed-header{
+        width: 100%;     
+        background: black;
+        padding: 12px 0;
+        color: #fff;
+
+    }
+        .fixed-footer{
+        width: 100%;   
+        position: fixed; 
+        background: black;
+        padding: 8px 0;
+        color: #fff;
+    }
+    .fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    }  
+
+    button {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+}
     </style>
    </head>
   <body>
-    <h1>Login into Super Mart</h1>
+      <div class="fixed-header">
+  <div class="containerr"><h4><center><u>Smart Shopping Cart</u></center></h4></div>        
+  </div>
+    <center><h1>Login into Super Mart</h1></center>
     <div id="firebaseui-auth-container"></div>
     <center><button id="myButton" class="float-left submit-button">Continue without Logging in</button></center>
+      <div class="fixed-footer">
+<div class="containerr"><h6><center>Copyright &copy; 2018 Smart Shopping Cart</center></h6></div>        
+</div>
   </body>
 
   <script>
