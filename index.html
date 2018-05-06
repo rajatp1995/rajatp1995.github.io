@@ -2,6 +2,9 @@
 <html>
 <head>
 <title>Smart Shopping Cart</title>
+    <link rel="stylesheet" type="text/css" href="normalize.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="set2.css" />
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
@@ -46,45 +49,138 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style type="text/css">
-	body {
-    height: 200px;
-    background: red; 
-    background: linear-gradient(white , white, aqua); 
+img {
+    width: 100%;
+    height: auto;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    transition: background-color .5s;
+}
+
+body{        
+        padding-top: 60px;
+        padding-bottom: 40px;
+    }
+    .containerr{
+        width: 100%;
+        margin: 0 auto; /* Center the DIV horizontally */
+    }
+    .fixed-header{
+        width: 100%;
+        position: fixed;        
+        background: #333;
+        padding: 15px 0;
+        color: #fff;
+    }
+        .fixed-footer{
+        width: 100%;
+        position: fixed;        
+        background: #333;
+        padding: 8px 0;
+        color: #fff;
+    }
+    .fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    }  
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.7s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 21px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 2px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
 </style>
 <body>
+  <div class="fixed-header">
+  <div class="containerr"><h4><center><u>Smart Shopping Cart</u></center></h4></div>        
+  </div>
 <div class="container">
-<h3><center><u>Smart Shopping Cart</u></center></h3>
-<br>
-<marquee><b><i> Welcome to Smart Shopping Cart Interface, start by connecting your shopping cart.</i></b></marquee>
+  <div id="main">
+
+  <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#"><i>Welcome!</i></a>
+  <br><br>
+  <a href="login_admin.html">Admin Login</a>
+  <a href="rate_card.html">Price List</a>
+  <a href="#">About</a>
+</div>
+
 <br><br>
+<marquee><b><i> Welcome to Smart Shopping Cart Interface</i></b></marquee>
+<br><br>
+<span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; Shopping Menu</span>
+<br><br>
+<img src="img.jpg" alt="Smart Shopping Cart">
+<br><br>
+<h6><b>Get Started by entering below the cart number that is displayed on your shopping cart.</b></h6>
+<h6><b><i>For more options, use the Shopping Menu above.</i></b></h6>
+<br>
 <form action="login.html" id="fm1">
-	<input type="text" name="cartno" placeholder="Enter Cart Number" required>
-	<br>
-	<br>
-    <input type="submit" name="submit" onclick="myFunctio()">
-	<br>
-	<br>
-
+          <span class="input input--yoshiko">
+          <input class="input__field input__field--yoshiko" type="text" id="input-10" onchange="myFunctio()" />
+          <label class="input__label input__label--yoshiko" for="input-10">
+            <span class="input__label-content input__label-content--yoshiko" data-content="Enter your Cart Number">Cart Number</span>
+          </label>
+        </span>
 </form>
-
-<button id="myButton" class="float-left submit-button" >Administrator Controls</button>
 <br>
-<br>
+</div>
+</div>
+<div class="fixed-footer">
+<div class="containerr"><h6><center>Copyright &copy; 2018 Smart Shopping Cart</center></h6></div>        
 </div>
 </body>
 </html>
 
-<script type="text/javascript">	
+<script type="text/javascript"> 
 
-	document.getElementById("myButton").onclick = function () {
-    location.href = "login_admin.html";
-    };
+  var textu = "";
+  var myData;
 
-	var textu = "";
-	var myData;
-
-	function myFunctio() {
+  function myFunctio() {
     var x = document.getElementById("fm1");
     var i;
     for (i = 0; i < x.length ;i++) {
@@ -92,4 +188,16 @@
     }
     sessionStorage.setItem('cartnumber', textu);
     }
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "180px";
+    document.getElementById("main").style.marginLeft = "180px";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+    document.body.style.backgroundColor = "white";
+  }
 </script>
