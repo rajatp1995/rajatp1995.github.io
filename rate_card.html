@@ -8,26 +8,56 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <style>
+       body{
+        background-color: lightblue;
+       }
+
        table, td {
        border: 1px solid black;
        }
 
-       body {
-       height: 200px;
-       background: red; 
-       background: linear-gradient(white , white, aqua); 
-       }
+    .containerr{
+        width: 100%;
+        margin: 0 auto; /* Center the DIV horizontally */
+    }
+    .fixed-header{
+        width: 100%;     
+        background: black;
+        padding: 12px 0;
+        color: #fff;
+
+    }
+        .fixed-footer{
+        width: 100%;
+        position: fixed;   
+        background: black;
+        padding: 8px 0;
+        color: #fff;
+    }
+    .fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    }  
   </style>
 
 </head>
 <body>
-	<div class="container">
+
+      <div class="fixed-header">
+  <div class="containerr"><h4><center><u>Smart Shopping Cart</u></center></h4></div>        
+  </div>
+    <div class="container">
     <br>
 	<h3><center><b>Price List</b></center></h3>
   <br>
   <table id="myTablee" style="width:100% ; background-color: #C0C0C0">
   </table>
   <br>
+</div>
+  <div class="fixed-footer">
+<div class="containerr"><h6><center>Copyright &copy; 2018 Smart Shopping Cart</center></h6></div>        
 </div>
 </body>
 </html>

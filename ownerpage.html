@@ -6,6 +6,9 @@
 
 <html>
 <head>
+      <link rel="stylesheet" type="text/css" href="normalize.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="set2.css" />
   <title>Smart Shopping Cart</title>
   <script type="text/javascript">
   var config = {
@@ -25,6 +28,18 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <style>
+
+button {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+}
        table, td {
        border: 1px solid black;
        }
@@ -36,46 +51,158 @@
        .redtext {
         color: red;
        }
+    .containerr{
+        width: 100%;
+        margin: 0 auto; /* Center the DIV horizontally */
+    }
+    .fixed-header{
+        width: 100%;     
+        background: black;
+        padding: 12px 0;
+        color: #fff;
+    }
+        .fixed-footer{
+        width: 100%; 
+        background: black;
+        padding: 8px 0;
+        color: #fff;
+    }
+    .fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    }  
 
-        body {
-        height: 200px;
-        background: red;
-        background: linear-gradient(white , white, aqua); 
-       }
+
+    .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.7s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 21px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 2px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    transition: background-color .5s;
+}
   </style>
 
 </head>
 <body>
-	<div class="container">
+  <div id="main">
+  <div class="fixed-header">
+  <div class="containerr"><h4><center><u>Smart Shopping Cart</u></center></h4></div>        
+  </div>
+  <div class="container">
+  <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#"><i>Options</i></a>
+  <br><br>
+  <a href="ownerpage.html">Refresh Page</a>
+  <a href="index.html">Log Out</a>
+</div>
+
     <br>
 	<h3><center>Add/Remove Items</center></h3>
   <table id="myTablee" style="width:100% ; background-color: #C0C0C0">
   </table><br>
-  <b class="bluetext">Add a new item / Change the location of an existing item :</b><br>
-	<form id="dataform">
-		<input type="text" name="pname" placeholder="Product Name" required>
+  <h5><b class="bluetext">Add new item / Change the location of an existing item</b></h5>
+  <br>
+	<form id="dataform" >
+		          <span class="input input--yoshiko">
+          <input class="input__field input__field--yoshiko" type="text" id="input-10" required />
+          <label class="input__label input__label--yoshiko" for="input-10">
+            <span class="input__label-content input__label-content--yoshiko" data-content="Enter Grocery Name">Grocery Name</span>
+          </label>
+        </span>
     <br>
-		<input type="text" name="px" placeholder="X-Coordinate" required>
+		              <span class="input input--yoshiko">
+          <input class="input__field input__field--yoshiko" type="text" id="input-10" required />
+          <label class="input__label input__label--yoshiko" for="input-10">
+            <span class="input__label-content input__label-content--yoshiko" data-content="Enter Grocery's X-Coordinate">Grocery's X-Coordinate</span>
+          </label>
+        </span>
     <br>
-		<input type="text" name="py" placeholder="Y-Coordinate" required>
+		                  <span class="input input--yoshiko">
+          <input class="input__field input__field--yoshiko" type="text" id="input-10" required />
+          <label class="input__label input__label--yoshiko" for="input-10">
+            <span class="input__label-content input__label-content--yoshiko" data-content="Enter Grocery's Y-Coordinate">Grocery's Y-Coordinate</span>
+          </label>
+        </span>
     <br>
-    <input type="text" name="pz" placeholder="Price per unit" required>
+                          <span class="input input--yoshiko">
+          <input class="input__field input__field--yoshiko" type="text" id="input-10" required onsubmit="saveData()" />
+          <label class="input__label input__label--yoshiko" for="input-10">
+            <span class="input__label-content input__label-content--yoshiko" data-content="Enter Grocery's Price per unit">Grocery's Price/Unit</span>
+          </label>
+        </span>
     <br><br>
 		<button onclick="saveData()">Save Data</button>
 	</form>
-  <br><br>
-  <b class="redtext">Remove an item :</b><br>
+  <br>
+  <h5><b class="redtext">Remove an item :</b></h5>
+  <br>
   <form id="dataformdel">
-  <input type="text" name="pname" placeholder="Product to be removed" required>
+                            <span class="input input--yoshiko">
+          <input class="input__field input__field--yoshiko" type="text" id="input-10" required />
+          <label class="input__label input__label--yoshiko" for="input-10">
+            <span class="input__label-content input__label-content--yoshiko" data-content="Enter Grocery Name to be deleted">Grocery to be deleted</span>
+          </label>
+        </span>
   <br><br>
   <button onclick="delData()">Remove product</button>
   </form>
+  <br>
+  <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; More Options</span>
   <br><br>
+  <!--
   <button id="refButtonn" class="float-left submit-button" >Refresh Page</button>
   &nbsp;
   &nbsp;
   <button id="goback" class="float-left submit-button" >Log out</button>
-  <br><br><br>
+  <br><br><br>-->
+</div>
+  <div class="fixed-footer">
+<div class="containerr"><h6><center>Copyright &copy; 2018 Smart Shopping Cart</center></h6></div>        
+</div>
 </div>
 </body>
 </html>
@@ -221,5 +348,18 @@
     sessionStorage.setItem('fdataa',datacdn);
     });
     } 
+
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "180px";
+    document.getElementById("main").style.marginLeft = "180px";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+    document.body.style.backgroundColor = "white";
+  }
 
 </script>
