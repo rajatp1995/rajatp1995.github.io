@@ -55,6 +55,7 @@
    </script>
 
   <style>
+
   table, td {
     border: 1px solid black;
   }
@@ -579,14 +580,13 @@ for (var i = 0; i < clist.length-1; i++)
     }
 
     var checkBox = document.createElement("input");
-    var label = document.createElement("label");
     var brek = document.createElement("br");
     checkBox.type = "checkbox";
     checkBox.name = "shoplist";
     checkBox.value = clist[i];
+    checkBox.id = "mycheckb";
     myDiv.appendChild(checkBox);
-    myDiv.appendChild(label);
-    label.appendChild(document.createTextNode(clist[i]));
+    myDiv.appendChild(document.createTextNode(clist[i]));
     myDiv.appendChild(brek);
 }
 
