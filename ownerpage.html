@@ -193,12 +193,12 @@ body {
   <br>
   <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; More Options</span>
   <br><br>
-  <!--
-  <button id="refButtonn" class="float-left submit-button" >Refresh Page</button>
+  
+  <button id="refButtonn" class="float-left submit-button" hidden>Refresh Page</button>
   &nbsp;
   &nbsp;
-  <button id="goback" class="float-left submit-button" >Log out</button>
-  <br><br><br>-->
+  <button id="goback" class="float-left submit-button" hidden>Log out</button>
+  <!--<br><br><br> -->
 </div>
   <div class="fixed-footer">
 <div class="containerr"><h6><center>Copyright &copy; 2018 Smart Shopping Cart</center></h6></div>        
@@ -270,10 +270,10 @@ body {
         }
       }
 
-    /*document.getElementById("goback").onclick = function () 
+    document.getElementById("goback").onclick = function () 
     {
     location.href = "index.html";
-    };*/
+    };
 
     document.getElementById("refButtonn").onclick = function () {
     location.href = "ownerpage.html";
